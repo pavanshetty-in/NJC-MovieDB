@@ -25,4 +25,8 @@ require("./db/conn");
 
 app.get("/",(req,res) =>{
 res.render("index");
-})
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running at port no ${PORT}`);
+  });
