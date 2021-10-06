@@ -1,11 +1,11 @@
-const mongoose= require("mangoose");
+const mongoose= require("mongoose");
 
 const movieSchema =new mongoose.Schema({
   name:{
       type:String,
       required : true,
   },
-  leadacter:{
+  leadactor:{
     type:String,
     required : true,
   },
@@ -25,3 +25,5 @@ const movieSchema =new mongoose.Schema({
        required:true,
    }
 });
+const Movie=mongoose.model("MOVIE",movieSchema);
+module.exports=Movie;

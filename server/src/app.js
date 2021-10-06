@@ -25,4 +25,22 @@ require("./db/conn");
 
 app.get("/",(req,res) =>{
 res.render("index");
-})
+});
+
+app.post("/addmovie",async(req,res)=>{
+  try
+  {
+ 
+    const {name,leadactor,actress,director,year}=req.body;
+    const add= new Movie({name,leadactor,actress,director,year});
+    await add.save();
+    res.redirect("/");
+  }
+  catch(err){
+    console.log(err);
+  }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running at port no ${PORT}`);
+  });
