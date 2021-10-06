@@ -23,8 +23,10 @@ app.set("view engine", "hbs");
 app.set("views", template_path);
 require("./db/conn");
 
-app.get("/",(req,res) =>{
-res.render("index");
+app.get("/",async(req,res) =>{
+  const movies=await Movie.find();
+  console.log(movies);
+res.render("index",{movies:movies});
 });
 
 app.post("/addmovie",async(req,res)=>{
@@ -40,6 +42,18 @@ app.post("/addmovie",async(req,res)=>{
     console.log(err);
   }
 });
+
+app.post("/searchmovie",async(req,res)=>{
+  try{
+    const name=req.body;
+    const movies=await Movie.find({"leadactor":name.leadactor});
+    console.log(movies);
+    res.render("actor",{movies:movies,name:name})
+  }
+  catch(err){
+    console.log(err);
+  }
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running at port no ${PORT}`);
